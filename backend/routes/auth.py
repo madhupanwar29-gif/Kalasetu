@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from schemes.user_schema import UserSignup
 from database import db
+import bcrypt
 
 router = APIRouter()
 
@@ -23,25 +24,32 @@ def signup(user: UserSignup):
         raise HTTPException(
             status_code=400,
             detail="Username already exists."
-        ) 
-    
+        )
+
+    # Check if email already exists
     existing_email = db.users.find_one({
-    "email": user.email
+        "email": user.email
     })
 
     if existing_email:
-     raise HTTPException(
-        status_code=400,
-        detail="Email already exists."
-    )
+        raise HTTPException(
+            status_code=400,
+            detail="Email already exists."
+        )
 
-    # Create user document
+    # Hash password
+    hashed_password = bcrypt.hashpw(
+        user.password.encode("utf-8"),
+        bcrypt.gensalt()
+    ).decode("utf-8")
+
+    # User document
     user_data = {
         "name": user.name,
         "username": user.username,
         "email": user.email,
         "phone": user.phone,
-        "password": user.password
+        "password": hashed_password
     }
 
     # Save user
