@@ -1,0 +1,54 @@
+# ==========================
+# Python (Backend)
+# ==========================
+
+# Virtual Environment
+backend/venv/
+
+# Python Cache
+backend/__pycache__/
+backend/routes/__pycache__/
+backend/schemes/__pycache__/
+backend/**/*.py[cod]
+
+# Environment Variables
+backend/.env
+
+# ==========================
+# React / Node (Frontend)
+# ==========================
+
+# Dependencies
+frontend/node_modules/
+
+# Build Output
+frontend/dist/
+
+# Environment Variables
+frontend/.env
+
+# ==========================
+# VS Code
+# ==========================
+
+.vscode/
+
+# ==========================
+# OS Files
+# ==========================
+
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Logs
+# ==========================
+
+*.log
+
+# ==========================
+# Misc
+# ==========================
+
+*.tmp
+*.bak
