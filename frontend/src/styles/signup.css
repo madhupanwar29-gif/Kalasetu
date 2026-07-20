@@ -1,0 +1,328 @@
+/* ==========================================================
+   KALASETU - PREMIUM HERITAGE SIGNUP PAGE
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@500;600&family=Poppins:wght@300;400;500&display=swap');
+
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.signup-container{
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    padding:8px;
+
+    background:
+    radial-gradient(circle at top,#fbf8f2,#f2eadb 70%);
+
+    font-family:'Poppins',sans-serif;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.signup-card{
+
+    width:400px;
+
+    max-width:95%;
+
+    background:#fffdf8;
+
+    padding:15px 22px;
+
+    border-radius:16px;
+
+    border:1px solid #d6bf95;
+
+    position:relative;
+
+    box-shadow:
+    0 12px 25px rgba(60,45,25,.10);
+
+    animation:fadeUp .6s ease;
+}
+
+.signup-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:7px;
+
+    border:1px solid rgba(176,141,87,.15);
+
+    border-radius:12px;
+
+    pointer-events:none;
+}
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.logo{
+
+    font-family:'Cinzel',serif;
+
+    font-size:28px;
+
+    letter-spacing:4px;
+
+    color:#3d2c22;
+
+    text-align:center;
+
+    margin-bottom:2px;
+}
+
+.logo::before,
+.logo::after{
+
+    content:"✦";
+
+    color:#b08d57;
+
+    font-size:12px;
+
+    margin:0 8px;
+}
+
+/* ==========================================================
+   TAGLINE
+========================================================== */
+
+.tagline{
+
+    text-align:center;
+
+    font-size:13px;
+
+    line-height:1.35;
+
+    color:#6b5b4d;
+
+    font-style:italic;
+
+    margin-bottom:10px;
+}
+
+.tagline::before{
+
+    content:"━━━━━━━━━━━━";
+
+    display:block;
+
+    color:#d0b27b;
+
+    letter-spacing:2px;
+
+    font-size:8px;
+
+    margin-bottom:6px;
+}
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+.signup-card h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:24px;
+
+    color:#3d2c22;
+
+    text-align:center;
+
+    margin-bottom:12px;
+}
+
+/* ==========================================================
+   MESSAGE
+========================================================== */
+
+.message{
+
+    margin-bottom:10px;
+
+    padding:9px;
+
+    background:#f8f3ea;
+
+    border:1px solid #d7c19a;
+
+    border-radius:8px;
+
+    color:#5c4637;
+
+    text-align:center;
+
+    font-size:13px;
+}
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.signup-card form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.signup-card input{
+
+    width:100%;
+
+    padding:9px 13px;
+
+    border-radius:7px;
+
+    border:1px solid #dac9aa;
+
+    background:#fffdfa;
+
+    color:#3d2c22;
+
+    font-size:14px;
+
+    transition:.3s;
+
+    font-family:'Poppins',sans-serif;
+}
+
+.signup-card input::placeholder{
+
+    color:#8c7b6d;
+}
+
+.signup-card input:focus{
+
+    outline:none;
+
+    border-color:#b08d57;
+
+    box-shadow:0 0 0 3px rgba(176,141,87,.12);
+}
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.signup-card button{
+
+    margin-top:4px;
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:7px;
+
+    background:linear-gradient(135deg,#9a7444,#7a5933);
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    letter-spacing:.5px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.signup-card button:hover{
+
+    background:linear-gradient(135deg,#7a5933,#5f4226);
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 18px rgba(122,89,51,.25);
+}
+
+.signup-card button:disabled{
+
+    background:#b8a58d;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+}
+
+/* ==========================================================
+   LOGIN LINK
+========================================================== */
+
+.login-link{
+
+    margin-top:10px;
+
+    text-align:center;
+
+    color:#6a594d;
+
+    font-size:13px;
+}
+
+.login-link span{
+
+    color:#8d6b3f;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.login-link span:hover{
+
+    color:#6d4d29;
+
+    text-decoration:underline;
+}
+
+/* ==========================================================
+   ANIMATION
+========================================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
