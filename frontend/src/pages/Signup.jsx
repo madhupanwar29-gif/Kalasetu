@@ -2,6 +2,59 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import api from "../services/api";
 
+const Field = ({ name, label, type = "text", value, error, onChange, inputClass, ...props }) => (
+    <div className="min-w-0">
+        <label
+            htmlFor={name}
+            className="mb-1.5 block text-sm font-semibold text-stone-700"
+        >
+            {label}
+        </label>
+
+        <input
+            {...props}
+            id={name}
+            name={name}
+            type={type}
+            className={inputClass(name)}
+            value={value}
+            onChange={onChange}
+        />
+
+        {error && (
+            <p className="mt-1.5 text-xs font-medium text-red-600">
+                {error}
+            </p>
+        )}
+    </div>
+);
+
+const PasswordField = ({ name, label, value, error, shown, onChange, onToggle, inputClass }) => (
+    <div className="min-w-0">
+        <label htmlFor={name} className="mb-1.5 block text-sm font-semibold text-stone-700">{label}</label>
+        <div className="relative">
+            <input
+                id={name}
+                name={name}
+                type={shown ? "text" : "password"}
+                value={value}
+                onChange={onChange}
+                autoComplete="new-password"
+                className={`${inputClass(name)} pr-16`}
+            />
+            <button
+                type="button"
+                onClick={onToggle}
+                aria-label={`${shown ? "Hide" : "Show"} ${label}`}
+                className="absolute inset-y-0 right-2 my-auto h-8 rounded-lg px-2 text-xs font-bold text-violet-700 transition hover:bg-violet-100 focus:outline-none focus:ring-2 focus:ring-violet-400"
+            >
+                {shown ? "Hide" : "Show"}
+            </button>
+        </div>
+        {error && <p className="mt-1.5 text-xs font-medium text-red-600" role="alert">{error}</p>}
+    </div>
+);
+
 function Signup() {
     const [formData, setFormData] = useState({
         name: "",
@@ -71,40 +124,6 @@ function Signup() {
             : "border-stone-300 hover:border-amber-300 focus:border-violet-500 focus:ring-violet-100"
     }`;
 
-    const Field = ({ name, label, type = "text", ...props }) => (
-        <div className="min-w-0">
-            <label htmlFor={name} className="mb-1.5 block text-sm font-semibold text-stone-700">{label}</label>
-            <input id={name} name={name} type={type} value={formData[name]} onChange={handleChange} className={inputClass(name)} {...props} />
-            {errors[name] && <p className="mt-1.5 text-xs font-medium text-red-600" role="alert">{errors[name]}</p>}
-        </div>
-    );
-
-    const PasswordField = ({ name, label, shown, onToggle }) => (
-        <div className="min-w-0">
-            <label htmlFor={name} className="mb-1.5 block text-sm font-semibold text-stone-700">{label}</label>
-            <div className="relative">
-                <input
-                    id={name}
-                    name={name}
-                    type={shown ? "text" : "password"}
-                    value={formData[name]}
-                    onChange={handleChange}
-                    autoComplete="new-password"
-                    className={`${inputClass(name)} pr-16`}
-                />
-                <button
-                    type="button"
-                    onClick={onToggle}
-                    aria-label={`${shown ? "Hide" : "Show"} ${label}`}
-                    className="absolute inset-y-0 right-2 my-auto h-8 rounded-lg px-2 text-xs font-bold text-violet-700 transition hover:bg-violet-100 focus:outline-none focus:ring-2 focus:ring-violet-400"
-                >
-                    {shown ? "Hide" : "Show"}
-                </button>
-            </div>
-            {errors[name] && <p className="mt-1.5 text-xs font-medium text-red-600" role="alert">{errors[name]}</p>}
-        </div>
-    );
-
     return (
         <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-50 via-amber-50 to-violet-100 px-4 py-8 sm:px-6">
             <section className="w-full max-w-2xl rounded-3xl border-2 border-amber-100 bg-white/95 p-6 shadow-[0_20px_55px_rgba(120,53,15,0.15)] backdrop-blur-sm md:p-8">
@@ -123,12 +142,12 @@ function Signup() {
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid gap-x-5 gap-y-4 md:grid-cols-2">
-                        <Field name="name" label="Full Name" placeholder="Your full name" autoComplete="name" />
-                        <Field name="username" label="Username" placeholder="Choose a username" autoComplete="username" />
-                        <Field name="email" label="Email Address" type="email" placeholder="you@example.com" autoComplete="email" />
-                        <Field name="phone" label="Phone Number" type="tel" placeholder="10-digit mobile number" autoComplete="tel" inputMode="numeric" />
-                        <PasswordField name="password" label="Password" shown={showPassword} onToggle={() => setShowPassword(!showPassword)} />
-                        <PasswordField name="confirm_password" label="Confirm Password" shown={showConfirmPassword} onToggle={() => setShowConfirmPassword(!showConfirmPassword)} />
+                        <Field name="name" label="Full Name" value={formData.name} error={errors.name} onChange={handleChange} inputClass={inputClass} placeholder="Your full name" autoComplete="name" />
+                        <Field name="username" label="Username" value={formData.username} error={errors.username} onChange={handleChange} inputClass={inputClass} placeholder="Choose a username" autoComplete="username" />
+                        <Field name="email" label="Email Address" type="email" value={formData.email} error={errors.email} onChange={handleChange} inputClass={inputClass} placeholder="you@example.com" autoComplete="email" />
+                        <Field name="phone" label="Phone Number" type="tel" value={formData.phone} error={errors.phone} onChange={handleChange} inputClass={inputClass} placeholder="10-digit mobile number" autoComplete="tel" inputMode="numeric" />
+                        <PasswordField name="password" label="Password" value={formData.password} error={errors.password} onChange={handleChange} inputClass={inputClass} shown={showPassword} onToggle={() => setShowPassword(!showPassword)} />
+                        <PasswordField name="confirm_password" label="Confirm Password" value={formData.confirm_password} error={errors.confirm_password} onChange={handleChange} inputClass={inputClass} shown={showConfirmPassword} onToggle={() => setShowConfirmPassword(!showConfirmPassword)} />
                     </div>
 
                     <button
