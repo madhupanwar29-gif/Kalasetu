@@ -2,7 +2,8 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Categories from "../components/Categories";
 import WhyChoose from "../components/WhyChoose";
-import "../styles/landing.css";
+import Footer from "../components/Footer";
+
 
 function LandingPage() {
 
@@ -12,6 +13,7 @@ function LandingPage() {
             <Hero />
             <Categories />
             <WhyChoose />
+            <Footer />
         </>
     );
 
