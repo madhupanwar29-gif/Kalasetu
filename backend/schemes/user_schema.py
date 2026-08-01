@@ -7,3 +7,7 @@ class UserSignup(BaseModel):
     phone: str
     password: str
     confirm_password: str
+
+class UserLogin(BaseModel):
+    username: str
+    password: str

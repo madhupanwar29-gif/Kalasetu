@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from schemes.user_schema import UserSignup
+from schemes.user_schema import UserLogin, UserSignup
 from database import db
+from utils.jwt_handler import create_access_token
 import bcrypt
 
 router = APIRouter()
@@ -57,4 +58,62 @@ def signup(user: UserSignup):
 
     return {
         "message": "User registered successfully!"
+    }
+
+
+# -------------------------
+# LOGIN ROUTE
+# -------------------------
+@router.post("/login")
+def login(user: UserLogin):
+
+    # Search MongoDB for a user whose username matches
+    # the username entered on the login page.
+    existing_user = db.users.find_one({
+        "username": user.username
+    })
+
+    # If no user is found, stop the function
+    # and return an Unauthorized error.
+    if not existing_user:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid username or password."
+        )
+
+    # Compare the password entered by the user
+    # with the hashed password stored in MongoDB.
+    #
+    # user.password -> Plain password entered on login page
+    # existing_user["password"] -> Hashed password stored in MongoDB
+    #
+    # checkpw() returns:
+    # True  -> Password is correct
+    # False -> Password is incorrect
+    if not bcrypt.checkpw(
+        user.password.encode("utf-8"),
+        existing_user["password"].encode("utf-8")
+    ):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid username or password."
+        )
+
+    # If execution reaches here:
+    # 1. Username exists
+    # 2. Password is correct
+    #
+    # Therefore, login is successful.
+     # Create JWT token
+    access_token = create_access_token(
+        data={
+            "username": existing_user["username"]
+        }
+    )
+
+    # Return token to frontend
+    return {
+        "message": "Login successful!",
+        "access_token": access_token,
+        "token_type": "bearer"
     }
