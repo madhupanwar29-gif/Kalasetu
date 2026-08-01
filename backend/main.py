@@ -7,13 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 # -------------------- CORS --------------------
-# Allow React frontend (running on port 5173)
-# to communicate with the FastAPI backend.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://127.0.0.1:5173"
+        "http://127.0.0.1:5173",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -21,7 +19,6 @@ app.add_middleware(
 )
 
 # -------------------- Routes --------------------
-# Register all routes from auth.py
 app.include_router(auth_router)
 
 # -------------------- Home Route --------------------
