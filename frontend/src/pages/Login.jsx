@@ -1,106 +1,289 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import API from "../services/api";
+import api from "../services/api";
+
+const Field = ({
+  name,
+  label,
+  type = "text",
+  value,
+  error,
+  onChange,
+  inputClass,
+  ...props
+}) => (
+  <div className="min-w-0">
+    <label
+      htmlFor={name}
+      className="mb-1.5 block text-sm font-semibold text-stone-700"
+    >
+      {label}
+    </label>
+
+    <input
+      {...props}
+      id={name}
+      name={name}
+      type={type}
+      value={value}
+      onChange={onChange}
+      className={inputClass(name)}
+    />
+
+    {error && (
+      <p className="mt-1.5 text-xs font-medium text-red-600">
+        {error}
+      </p>
+    )}
+  </div>
+);
+
+const PasswordField = ({
+  name,
+  label,
+  value,
+  error,
+  shown,
+  onChange,
+  onToggle,
+  inputClass,
+}) => (
+  <div className="min-w-0">
+    <label
+      htmlFor={name}
+      className="mb-1.5 block text-sm font-semibold text-stone-700"
+    >
+      {label}
+    </label>
+
+    <div className="relative">
+      <input
+        id={name}
+        name={name}
+        type={shown ? "text" : "password"}
+        value={value}
+        onChange={onChange}
+        autoComplete="current-password"
+        className={`${inputClass(name)} pr-16`}
+      />
+
+      <button
+        type="button"
+        onClick={onToggle}
+        className="absolute inset-y-0 right-2 my-auto h-8 rounded-lg px-2 text-xs font-bold text-violet-700 hover:bg-violet-100"
+      >
+        {shown ? "Hide" : "Show"}
+      </button>
+    </div>
+
+    {error && (
+      <p className="mt-1.5 text-xs font-medium text-red-600">
+        {error}
+      </p>
+    )}
+  </div>
+);
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
 
- const handleLogin = async (e) => {
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+    setErrors({
+      ...errors,
+      [e.target.name]: "",
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.username.trim())
+      newErrors.username = "Username is required";
+
+    if (!formData.password)
+      newErrors.password = "Password is required";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setMessage("");
+
+    if (!validateForm()) return;
+
+    setLoading(true);
+
     try {
+      const response = await api.post("/login", formData);
 
-        const response = await API.post("/login", {
-            username: username,
-            password: password
-        });
+      setMessage(response.data.message);
 
-        console.log(response.data);
+      console.log(response.data);
+
+      // Example:
+      // localStorage.setItem("token", response.data.access_token);
 
     } catch (error) {
-
-        console.log(error);
-
+      setMessage(
+        error.response
+          ? error.response.data.detail
+          : "Server Error. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
-};
+  };
+
+  const inputClass = (field) =>
+    `w-full rounded-xl border bg-stone-50 px-4 py-2.5 text-sm text-stone-800 outline-none transition duration-200 placeholder:text-stone-400 focus:bg-white focus:ring-4 ${
+      errors[field]
+        ? "border-red-400 focus:border-red-500 focus:ring-red-100"
+        : "border-stone-300 hover:border-amber-300 focus:border-violet-500 focus:ring-violet-100"
+    }`;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-stone-100 via-amber-50 to-stone-200 flex items-center justify-center p-6">
+    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-50 via-amber-50 to-violet-100 px-4 py-8">
 
-      <div className="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2">
+      <section className="grid w-full max-w-6xl overflow-hidden rounded-3xl border-2 border-amber-100 bg-white shadow-[0_20px_55px_rgba(120,53,15,0.15)] lg:grid-cols-2">
 
         {/* LEFT SIDE */}
-        <div className="hidden md:flex flex-col justify-center bg-linear-to-br from-stone-200 via-amber-100 to-stone-300 p-12">
 
-          <h1 className="text-5xl font-bold text-stone-800">
-            KalaSetu
-          </h1>
+        <div className="hidden lg:flex flex-col justify-center bg-gradient-to-br from-orange-500 via-amber-500 to-violet-500 p-12 text-white">
 
-          <p className="mt-6 text-lg leading-8 text-stone-700">
-            Connecting skilled artisans and service providers
-            with people who appreciate creativity and quality.
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em]">
+            Welcome Back
           </p>
 
-          <div className="mt-10 text-8xl text-center">
-            🎨
+          <h1 className="text-5xl font-extrabold tracking-[0.18em]">
+            KALASETU
+          </h1>
+
+          <p className="mt-8 text-lg leading-8 text-orange-50">
+            Every Skill Deserves Recognition.
+          </p>
+
+          <p className="text-lg leading-8 text-orange-50">
+            Every Dream Deserves a Chance.
+          </p>
+
+          <div className="mt-10 rounded-2xl bg-white/10 p-6 backdrop-blur">
+            <h3 className="text-xl font-bold">
+              Login to Continue
+            </h3>
+
+            <p className="mt-3 text-orange-100 leading-7">
+              Access your account, connect with skilled professionals,
+              discover services, and continue your journey with KalaSetu.
+            </p>
           </div>
 
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="p-10 md:p-14 flex flex-col justify-center">
 
-          <h2 className="text-3xl font-bold text-stone-800">
-            Welcome Back
-          </h2>
+        <div className="bg-white p-8 md:p-12">
 
-          <p className="text-stone-600 mt-2 mb-8">
-            Login to continue your journey.
-          </p>
+          <header className="mb-8 text-center">
 
-          <form onSubmit={handleLogin} className="space-y-5">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-orange-600">
+              Welcome to
+            </p>
 
-            <div>
-              <label className="block mb-2 text-stone-700 font-medium">
-                Username
-              </label>
+            <h1 className="text-3xl font-extrabold tracking-[0.18em] text-stone-800 sm:text-4xl">
+              KALASETU
+            </h1>
 
-              <input
-                type="text"
-                placeholder="Enter Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full rounded-xl border border-stone-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-600"
-              />
+            <h2 className="mt-5 text-2xl font-bold text-stone-800">
+              Login to your account
+            </h2>
+
+            <p className="mt-3 text-sm text-stone-600">
+              Enter your credentials to continue.
+            </p>
+
+          </header>
+
+          {message && (
+            <div className="mb-6 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-center text-sm font-medium text-orange-800">
+              {message}
             </div>
+          )}
 
-            <div>
-              <label className="block mb-2 text-stone-700 font-medium">
-                Password
-              </label>
+          <form onSubmit={handleSubmit} className="space-y-5">
 
-              <input
-                type="password"
-                placeholder="Enter Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-stone-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-600"
-              />
+            <Field
+              name="username"
+              label="Username"
+              value={formData.username}
+              error={errors.username}
+              onChange={handleChange}
+              inputClass={inputClass}
+              placeholder="Enter your username"
+              autoComplete="username"
+            />
+
+            <PasswordField
+              name="password"
+              label="Password"
+              value={formData.password}
+              error={errors.password}
+              shown={showPassword}
+              onChange={handleChange}
+              onToggle={() => setShowPassword(!showPassword)}
+              inputClass={inputClass}
+            />
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                className="text-sm font-semibold text-violet-700 hover:text-violet-900"
+              >
+                Forgot Password?
+              </button>
             </div>
 
             <button
-              className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 rounded-xl transition duration-300"
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-200 transition hover:from-orange-600 hover:to-red-600 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
 
           </form>
 
+          <p className="mt-6 text-center text-sm text-stone-600">
+            Don't have an account?{" "}
+            <Link
+              to="/signup"
+              className="font-bold text-violet-700 underline decoration-violet-300 underline-offset-4 hover:text-violet-900"
+            >
+              Sign Up
+            </Link>
+          </p>
+
         </div>
 
-      </div>
+      </section>
 
-    </div>
+    </main>
   );
 }
 
