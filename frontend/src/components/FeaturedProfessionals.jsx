@@ -1,156 +1,196 @@
+import { Star, MapPin, BadgeCheck } from "lucide-react";
+
+const professionals = [
+  {
+    id: 1,
+    name: "Rahul Sharma",
+    profession: "Electrician",
+    city: "Pune",
+    rating: 4.9,
+    reviews: 128,
+    price: "₹500 / Visit",
+  },
+  {
+    id: 2,
+    name: "Priya Patil",
+    profession: "Mehendi Artist",
+    city: "Mumbai",
+    rating: 4.8,
+    reviews: 93,
+    price: "₹2,000 / Event",
+  },
+  {
+    id: 3,
+    name: "Amit Jadhav",
+    profession: "Plumber",
+    city: "Nashik",
+    rating: 4.7,
+    reviews: 85,
+    price: "₹400 / Visit",
+  },
+  {
+    id: 4,
+    name: "Sneha Kulkarni",
+    profession: "Tailor",
+    city: "Pune",
+    rating: 4.9,
+    reviews: 176,
+    price: "₹350 / Service",
+  },
+];
+
 function FeaturedProfessionals() {
-    const professionals = [
-        {
-            id: 1,
-            name: "Rahul Sharma",
-            profession: "Electrician",
-            city: "Pune",
-            rating: 4.9,
-            reviews: 128,
-            price: "₹500 / Visit",
-            badge: "Verified",
-            available: true,
-            image: "https://i.pravatar.cc/300?img=11"
-        },
-        {
-            id: 2,
-            name: "Priya Patil",
-            profession: "Beautician",
-            city: "Mumbai",
-            rating: 4.8,
-            reviews: 97,
-            price: "₹700 / Session",
-            badge: "Top Rated",
-            available: true,
-            image: "https://i.pravatar.cc/300?img=32"
-        },
-        {
-            id: 3,
-            name: "Amit Joshi",
-            profession: "Photographer",
-            city: "Pune",
-            rating: 5.0,
-            reviews: 186,
-            price: "₹1500 / Event",
-            badge: "Verified",
-            available: false,
-            image: "https://i.pravatar.cc/300?img=15"
-        },
-        {
-            id: 4,
-            name: "Sneha Kulkarni",
-            profession: "Home Tutor",
-            city: "Nashik",
-            rating: 4.7,
-            reviews: 82,
-            price: "₹400 / Hour",
-            badge: "Certified",
-            available: true,
-            image: "https://i.pravatar.cc/300?img=48"
-        }
-    ];
+  return (
+    <section className="max-w-7xl mx-auto px-6 py-16">
 
-    return (
-        <section className="max-w-7xl mx-auto px-6 py-16">
+      <div className="flex items-center justify-between mb-10">
 
-            <div className="text-center mb-12">
+        <div>
 
-                <p className="text-orange-600 font-semibold uppercase tracking-widest">
-                    Featured Professionals
-                </p>
+          <h2 className="text-3xl font-bold text-stone-800">
+            Featured Professionals
+          </h2>
 
-                <h2 className="text-4xl font-bold text-stone-800 mt-3">
-                    Meet Our Top Rated Experts
-                </h2>
+          <p className="mt-2 text-stone-500">
+            Discover top-rated professionals trusted by hundreds of customers.
+          </p>
 
-                <p className="text-stone-600 mt-4 max-w-2xl mx-auto">
-                    Connect with trusted professionals who are highly rated by
-                    customers and ready to deliver quality services.
-                </p>
+        </div>
+
+        <button className="font-semibold text-orange-600 hover:underline">
+          View All →
+        </button>
+
+      </div>
+
+      <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-4">
+
+        {professionals.map((pro) => (
+
+          <div
+            key={pro.id}
+            className="relative rounded-3xl border border-stone-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+          >
+
+            {/* Verified Badge */}
+
+            <div className="absolute right-5 top-5 flex items-center gap-1 rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
+
+              <BadgeCheck size={14} />
+
+              Verified
 
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Avatar */}
 
-                {professionals.map((professional) => (
+            <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-red-500 text-2xl font-bold text-white">
 
-                    <div
-                        key={professional.id}
-                        className="bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300 overflow-hidden border border-stone-100"
-                    >
-
-                        <div className="relative">
-
-                            <img
-                                src={professional.image}
-                                alt={professional.name}
-                                className="w-full h-60 object-cover"
-                            />
-
-                            <span className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                                {professional.badge}
-                            </span>
-
-                            <span
-                                className={`absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full ${
-                                    professional.available
-                                        ? "bg-green-500 text-white"
-                                        : "bg-red-500 text-white"
-                                }`}
-                            >
-                                {professional.available
-                                    ? "Available"
-                                    : "Busy"}
-                            </span>
-
-                        </div>
-
-                        <div className="p-6">
-
-                            <h3 className="text-xl font-bold text-stone-800">
-                                {professional.name}
-                            </h3>
-
-                            <p className="text-orange-600 font-medium mt-1">
-                                {professional.profession}
-                            </p>
-
-                            <div className="flex items-center justify-between mt-4 text-sm text-stone-600">
-
-                                <span>⭐ {professional.rating}</span>
-
-                                <span>
-                                    {professional.reviews} Reviews
-                                </span>
-
-                            </div>
-
-                            <div className="flex items-center justify-between mt-3">
-
-                                <span className="text-stone-500">
-                                    📍 {professional.city}
-                                </span>
-
-                                <span className="font-bold text-violet-700">
-                                    {professional.price}
-                                </span>
-
-                            </div>
-
-                            <button className="w-full mt-6 bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 rounded-xl font-semibold hover:from-orange-600 hover:to-red-600 transition">
-                                Book Now
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                ))}
+              {pro.name
+                .split(" ")
+                .map((word) => word[0])
+                .join("")}
 
             </div>
 
-        </section>
-    );
+            {/* Name */}
+
+            <h3 className="text-center text-xl font-bold text-stone-800">
+
+              {pro.name}
+
+            </h3>
+
+            {/* Profession */}
+
+            <p className="mt-1 text-center font-medium text-orange-600">
+
+              {pro.profession}
+
+            </p>
+
+            {/* City */}
+
+            <div className="mt-4 flex items-center justify-center gap-2 text-sm text-stone-500">
+
+              <MapPin size={15} />
+
+              {pro.city}
+
+            </div>
+
+            {/* Rating */}
+
+            <div className="mt-4 flex justify-center">
+
+              <div className="flex items-center gap-2 rounded-full bg-yellow-100 px-3 py-1">
+
+                <Star
+                  size={15}
+                  fill="gold"
+                  className="text-yellow-500"
+                />
+
+                <span className="font-semibold">
+
+                  {pro.rating}
+
+                </span>
+
+                <span className="text-xs text-stone-500">
+
+                  ({pro.reviews})
+
+                </span>
+
+              </div>
+
+            </div>
+
+            {/* Price */}
+
+            <div className="mt-5 text-center">
+
+              <p className="text-xs uppercase tracking-wide text-stone-500">
+
+                Starting From
+
+              </p>
+
+              <p className="mt-1 text-2xl font-bold text-orange-600">
+
+                {pro.price}
+
+              </p>
+
+            </div>
+
+            {/* Buttons */}
+
+            <div className="mt-6 space-y-3">
+
+              <button className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-500 py-2.5 font-semibold text-white transition hover:from-orange-600 hover:to-red-600">
+
+                Book Now
+
+              </button>
+
+              <button className="w-full rounded-xl border border-orange-300 py-2.5 font-semibold text-orange-600 transition hover:bg-orange-50">
+
+                View Profile
+
+              </button>
+
+            </div>
+
+          </div>
+
+        ))}
+
+      </div>
+
+    </section>
+  );
 }
 
 export default FeaturedProfessionals;
