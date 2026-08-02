@@ -11,6 +11,7 @@ function LandingPage() {
         <>
             <Navbar />
             <Hero />
+             
             <Categories />
             <WhyChoose />
             <Footer />

@@ -27,7 +27,7 @@ function Hero() {
 
                     <div className="mt-9 flex flex-wrap gap-4">
                         <Link
-                            to="/signup"
+                            to="/Home"
                             className="rounded-lg border-2 border-orange-600 bg-orange-600 px-7 py-3.5 font-bold text-white shadow-[4px_4px_0_#713b62] transition hover:-translate-y-1 hover:bg-rose-600 hover:shadow-[6px_7px_0_#713b62] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300"
                         >
                             Explore Services
