@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import api from "../services/api";
+import { Link, useNavigate } from "react-router-dom";
 
 const Field = ({
   name,
@@ -90,6 +90,7 @@ function Login() {
     password: "",
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -135,7 +136,10 @@ function Login() {
 
       setMessage(response.data.message);
 
-      console.log(response.data);
+      // Redirect to Home
+      setTimeout(() => {
+    navigate("/home");
+     }, 1000);;
 
       // Example:
       // localStorage.setItem("token", response.data.access_token);

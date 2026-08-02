@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import api from "../services/api";
+import { Link, useNavigate } from "react-router-dom";
 
 const Field = ({ name, label, type = "text", value, error, onChange, inputClass, ...props }) => (
     <div className="min-w-0">
@@ -69,6 +69,7 @@ function Signup() {
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -110,6 +111,9 @@ function Signup() {
         try {
             const response = await api.post("/signup", formData);
             setMessage(response.data.message);
+            setTimeout(() => {
+            navigate("/home");
+}           , 1000);
             setFormData({ name: "", username: "", email: "", phone: "", password: "", confirm_password: "" });
         } catch (error) {
             setMessage(error.response ? error.response.data.detail : "Server Error. Please try again.");
