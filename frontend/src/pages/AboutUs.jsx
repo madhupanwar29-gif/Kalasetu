@@ -10,7 +10,7 @@ import JoinCommunity from "../components/JoinCommunity";
 
 function AboutUs() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-violet-50 pt-24">
+        <div className="min-h-screen bg-linear-to-br from-orange-50 via-white to-violet-50 pt-24">
 
             <Navbar />
 

@@ -62,7 +62,7 @@ const categories = [
 
 function HomeCategories() {
   return (
-    <section className="bg-gradient-to-b from-orange-50 to-white py-20">
+    <section className="bg-linear-to-b from-orange-50 to-white py-20">
 
       <div className="max-w-7xl mx-auto px-6">
 
@@ -93,7 +93,7 @@ function HomeCategories() {
               >
 
                 <div
-                  className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mx-auto`}
+                  className={`w-16 h-16 rounded-2xl bg-linear-to-br ${category.color} flex items-center justify-center mx-auto`}
                 >
 
                   <Icon

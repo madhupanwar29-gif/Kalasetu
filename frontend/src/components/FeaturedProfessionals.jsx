@@ -84,7 +84,7 @@ function FeaturedProfessionals() {
 
             {/* Avatar */}
 
-            <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-red-500 text-2xl font-bold text-white">
+            <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-orange-400 to-red-500 text-2xl font-bold text-white">
 
               {pro.name
                 .split(" ")
@@ -169,7 +169,7 @@ function FeaturedProfessionals() {
 
             <div className="mt-6 space-y-3">
 
-              <button className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-500 py-2.5 font-semibold text-white transition hover:from-orange-600 hover:to-red-600">
+              <button className="w-full rounded-xl bg-linear-to-r from-orange-500 to-red-500 py-2.5 font-semibold text-white transition hover:from-orange-600 hover:to-red-600">
 
                 Book Now
 

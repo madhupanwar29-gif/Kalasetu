@@ -112,7 +112,7 @@ function SearchSection() {
                     <div className="flex items-end">
 
                         <button
-                            className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-500 py-3 font-semibold text-white transition hover:from-orange-600 hover:to-red-600 hover:shadow-lg"
+                            className="w-full rounded-xl bg-linear-to-r from-orange-500 to-red-500 py-3 font-semibold text-white transition hover:from-orange-600 hover:to-red-600 hover:shadow-lg"
                         >
                             Find Professionals
                         </button>
