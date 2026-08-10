@@ -4,7 +4,7 @@ function JoinCommunity() {
     return (
         <section className="max-w-7xl mx-auto px-6 py-24">
 
-            <div className="bg-gradient-to-r from-stone-900 via-stone-800 to-stone-900 rounded-[40px] px-8 md:px-16 py-16 text-center text-white shadow-2xl">
+            <div className="bg-linear-to-r from-stone-900 via-stone-800 to-stone-900 rounded-[40px] px-8 md:px-16 py-16 text-center text-white shadow-2xl">
 
                 <div className="w-20 h-20 mx-auto rounded-full bg-orange-500 flex items-center justify-center">
 
