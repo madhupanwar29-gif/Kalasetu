@@ -4,6 +4,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home"; 
 import AboutUs from "./pages/AboutUs";
+import Services from "./pages/Services";
 
 function App() {
     return (
@@ -34,7 +35,7 @@ function App() {
                    path="/about"
                    element={<AboutUs />}
                     />
-
+                <Route path="/services" element={<Services />} />
             </Routes>
 
         </BrowserRouter>

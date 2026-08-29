@@ -4,7 +4,7 @@ function Navbar() {
 
     const links = [
         { name: "Home", path: "/home" },
-        { name: "Services", path: "#" },
+        { name: "Services", path: "/services" },
         { name: "Categories", path: "#" },
         { name: "About", path: "/about" },
     ];

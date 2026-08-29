@@ -4,7 +4,7 @@ function BecomeProvider() {
     return (
         <section className="max-w-7xl mx-auto px-6 py-20">
 
-            <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500 via-orange-600 to-red-500 shadow-2xl">
+            <div className="overflow-hidden rounded-3xl bg-linear-to-r from-orange-500 via-orange-600 to-red-500 shadow-2xl">
 
                 <div className="grid items-center gap-10 px-10 py-14 lg:grid-cols-2">
 

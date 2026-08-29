@@ -10,7 +10,7 @@ function Home() {
 
             <section className="mx-auto max-w-7xl px-5 pt-10 sm:px-6 sm:pt-14 lg:px-8">
 
-                <h1 className="max-w-3xl bg-gradient-to-r from-[#3f2136] via-[#522843] to-[#c65b2a] bg-clip-text text-4xl font-extrabold leading-tight tracking-tight text-transparent sm:text-5xl lg:text-6xl">
+                <h1 className="max-w-3xl bg-linear-to-r from-[#3f2136] via-[#522843] to-[#c65b2a] bg-clip-text text-4xl font-extrabold leading-tight tracking-tight text-transparent sm:text-5xl lg:text-6xl">
                     Find Trusted Professionals
                 </h1>
 

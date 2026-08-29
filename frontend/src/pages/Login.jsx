@@ -163,13 +163,13 @@ function Login() {
     }`;
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-50 via-amber-50 to-violet-100 px-4 py-8">
+    <main className="flex min-h-screen items-center justify-center bg-linear-to-br from-orange-50 via-amber-50 to-violet-100 px-4 py-8">
 
       <section className="grid w-full max-w-6xl overflow-hidden rounded-3xl border-2 border-amber-100 bg-white shadow-[0_20px_55px_rgba(120,53,15,0.15)] lg:grid-cols-2">
 
         {/* LEFT SIDE */}
 
-        <div className="hidden lg:flex flex-col justify-center bg-gradient-to-br from-orange-500 via-amber-500 to-violet-500 p-12 text-white">
+        <div className="hidden lg:flex flex-col justify-center bg-linear-to-br from-orange-500 via-amber-500 to-violet-500 p-12 text-white">
 
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em]">
             Welcome Back
@@ -266,7 +266,7 @@ function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-200 transition hover:from-orange-600 hover:to-red-600 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-xl bg-linear-to-r from-orange-500 to-red-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-200 transition hover:from-orange-600 hover:to-red-600 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Logging in..." : "Login"}
             </button>

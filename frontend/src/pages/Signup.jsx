@@ -129,7 +129,7 @@ function Signup() {
     }`;
 
     return (
-        <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-50 via-amber-50 to-violet-100 px-4 py-8 sm:px-6">
+        <main className="flex min-h-screen items-center justify-center bg-linear-to-br from-orange-50 via-amber-50 to-violet-100 px-4 py-8 sm:px-6">
             <section className="w-full max-w-2xl rounded-3xl border-2 border-amber-100 bg-white/95 p-6 shadow-[0_20px_55px_rgba(120,53,15,0.15)] backdrop-blur-sm md:p-8">
                 <header className="mb-6 text-center">
                     <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-orange-600">Welcome to</p>
@@ -157,7 +157,7 @@ function Signup() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-200 transition duration-200 hover:from-orange-600 hover:to-red-600 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60"
+                        className="w-full rounded-xl bg-linear-to-r from-orange-500 to-red-500 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-200 transition duration-200 hover:from-orange-600 hover:to-red-600 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                         {loading ? "Creating Account..." : "Create Account"}
                     </button>
