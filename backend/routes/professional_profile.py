@@ -5,6 +5,9 @@ from datetime import datetime
 from bson import ObjectId
 from schemes.professional_profile_response_schema import (
     ProfessionalProfileResponse
+) 
+from schemes.professional_profile_update_schema import (
+    ProfessionalProfileUpdate
 )
 
 router = APIRouter()
@@ -84,4 +87,55 @@ def get_professional_profile(profile_id: str):
         "total_reviews": profile["total_reviews"],
         "created_at": profile["created_at"],
         "updated_at": profile["updated_at"]
+    } 
+
+@router.put("/professional/profile/{profile_id}")
+def update_professional_profile(
+    profile_id: str,
+    profile_update: ProfessionalProfileUpdate
+):
+
+    # Convert profile_id to MongoDB ObjectId
+    try:
+        profile_object_id = ObjectId(profile_id)
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid profile_id."
+        )
+
+    # Check if profile exists
+    profile = db.professional_profiles.find_one(
+        {"profile_id": profile_object_id}
+    )
+
+    if not profile:
+        raise HTTPException(
+            status_code=404,
+            detail="Professional profile not found."
+        )
+
+    # Get only the fields that were provided
+    update_data = profile_update.model_dump(
+        exclude_unset=True
+    )
+
+    # Nothing to update
+    if not update_data:
+        raise HTTPException(
+            status_code=400,
+            detail="No fields provided for update."
+        )
+
+    # Add updated timestamp
+    update_data["updated_at"] = datetime.utcnow()
+
+    # Update profile
+    db.professional_profiles.update_one(
+        {"profile_id": profile_object_id},
+        {"$set": update_data}
+    )
+
+    return {
+        "message": "Professional profile updated successfully!"
     }
